@@ -1,5 +1,12 @@
+use std::io;
+
 fn main() {
-    let response = reqwest::blocking::get("https://github.com/Vowye?tab=repositories")
+    println!("Type in your github user:");
+
+    let mut user = String::new();
+    io::stdin().read_line(&mut user).expect("Failed to  read user.");
+
+    let response = reqwest::blocking::get( format!("https://github.com/{}?tab=repositories", user))
         .unwrap()
         .text()
         .unwrap();
